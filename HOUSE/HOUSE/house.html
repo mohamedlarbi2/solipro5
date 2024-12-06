@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="house.css">
+    <style>
+        /* Card Flip Animation */
+        .card {
+            transition: transform 0.5s ease, background-image 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <img src="img/pngwing.com.png" class="tree">
+    <div class="main">
+        <div class="etage3"></div>
+        <div class="etage2">
+            <div class="ROW1">
+                <div class="collector" onclick="show(0)">
+                    <div class="roof2"></div>
+                    <div class="window1"></div>
+                    <div id="cart1" class="card"></div>
+                </div>
+                <div class="collector" onclick="show(1)">
+                    <div class="roof2"></div>
+                    <div class="window1"></div>
+                    <div id="cart2" class="card"></div>
+                </div>
+                <div class="collector" onclick="show(2)">
+                    <div class="roof2"></div>
+                    <div class="window1"></div>
+                    <div id="cart3" class="card"></div>
+                </div>
+            </div>
+            <div class="rowcen">
+                <button id="start-button" class="button" onclick="startGame()">Start Game</button>
+                <button id="restart-button" class="button" onclick="restartGame()" style="display: none;">Quit</button>
+                <div class="window2" id="timer" style="width: 90px; height: 90px; text-align: center; line-height: 90px; background-color: lightgray;">
+                    Time: 00:00
+                </div>
+            </div>
+            <div class="ROW2">
+                <div class="collector" onclick="show(3)">
+                    <div class="roof2"></div>
+                    <div class="window1"></div>
+                    <div id="cart4" class="card"></div>
+                </div>
+                <div class="collector" onclick="show(4)">
+                    <div class="roof2"></div>
+                    <div class="window1"></div>
+                    <div id="cart5" class="card"></div>
+                </div>
+                <div class="collector" onclick="show(5)">
+                    <div class="roof2"></div>
+                    <div class="window1"></div>
+                    <div id="cart6" class="card"></div>
+                </div>
+            </div>
+        </div>
+        <div class="etage1">
+            <div class="port1">
+                <div class="glass1"></div>
+                <div class="glass2"></div>
+            </div>
+            <div class="port2">
+                <div class="glass3"></div>
+                <div class="roof"></div>
+            </div>
+            <div class="port3">
+                <div class="glass1"></div>
+                <div class="glass2"></div>
+            </div>
+        </div>
+        <hr style="height: 8px; width: 800px; background-color: black; transform: translate(-70px, -3px);">
+    </div>
+
+    <div id="dark" style="width: 100%; height: 120vh; background-color: #ccf3dc; position: fixed; display: none;"></div>
+    <img src="" id="imgsw" style="width: 40%; position: absolute; display: none; left: 30%; top: 10vh;">
+
+    <script>
+        let gameStarted = false;
+        let timerInterval, restartInterval;
+        let elapsedTime = 0;
+        let matchesFound = 0;
+        const totalMatches = 3;
+    
+        let source = [
+            'img/banana.jpg',
+            'img/banana.jpg',
+            'img/strawbery.jpg',
+            'img/watermelon.jpg',
+            'img/strawbery.jpg',
+            'img/watermelon.jpg'
+        ];
+    
+        const comp = []; // Track the clicked cards
+        let counter = 0; // Track the number of matches
+    
+        // Shuffle function to randomize card positions
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+    
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            return `${mins}:${secs}`;
+        }
+    
+        function startGame() {
+            if (gameStarted) return;
+    
+            gameStarted = true;
+            elapsedTime = 0;
+            matchesFound = 0;
+            comp.length = 0;
+            counter = 0;
+    
+            // Shuffle the source array
+            shuffle(source);
+    
+            document.getElementById('timer').textContent = `Time: 00:00`;
+            document.getElementById('start-button').style.display = 'none';
+            document.getElementById('restart-button').style.display = 'inline';
+    
+            const allCards = document.querySelectorAll('.card');
+            allCards.forEach(card => {
+                card.style.backgroundImage = '';
+                card.style.transform = "scaleY(0)";
+            });
+    
+            // Start gameplay timer
+            timerInterval = setInterval(() => {
+                elapsedTime++;
+                document.getElementById('timer').textContent = `Time: ${formatTime(elapsedTime)}`;
+            }, 1000);
+    
+            // Automatically restart the game after a fixed interval (e.g., 30 seconds)
+            restartInterval = setTimeout(() => {
+                restartGame();
+            }, 30000);
+        }
+    
+        function restartGame() {
+    
+
+    clearInterval(timerInterval); // Stop the current game timer
+    clearTimeout(restartInterval); // Prevent any existing restart triggers
+
+    // Reset all game variables
+    gameStarted = false;
+    elapsedTime = 0;
+    comp.length = 0;
+    counter = 0;
+
+    // Reset all cards
+    const carts = document.querySelectorAll('.card');
+    carts.forEach(element => {
+        element.style.transform = "scaleY(0)";
+        element.style.backgroundImage = "";
+    });
+
+    // Reset UI
+    document.getElementById('timer').textContent = `Time: 00:00`;
+    document.getElementById('start-button').style.display = 'inline';
+    document.getElementById('restart-button').style.display = 'none';
+
+    console.log("Game restarting automatically...");
+
+    // Start a new game automatically
+    stopGame()
+}
+
+    
+function show(n) {
+    if (!gameStarted) return; // Do nothing if the game hasn't started
+
+    const carts = document.querySelectorAll('.collector div[id]');
+
+    // Prevent double-clicking the same card or already matched cards
+    if (comp.includes(n) || carts[n].style.transform === "scaleY(1)") return;
+
+    // Reveal the selected card
+    carts[n].style.transform = "scaleY(1)";
+    carts[n].style.backgroundImage = `url(${source[n]})`;
+
+    // Show preview (optional feature)
+    document.getElementById("dark").style.display = "block";
+    document.getElementById("imgsw").src = source[n];
+    document.getElementById("imgsw").style.display = "block";
+
+    // Hide preview after 1 second
+    setTimeout(() => {
+        document.getElementById("dark").style.display = "none";
+        document.getElementById("imgsw").src = "";
+        document.getElementById("imgsw").style.display = "none";
+    }, 1000);
+
+    // Add the card index to the comparison array
+    comp.push(n);
+
+    // If two cards are selected, check for a match
+    if (comp.length === 2) {
+        const [v1, v2] = comp;
+
+        if (source[v1] === source[v2]) {
+            // Cards match
+            counter++;
+            console.log("Matches found:", counter);
+
+            // Check for win condition
+            if (counter === totalMatches) {
+                setTimeout(() => {
+                    stopGame();
+                    alert("You win! The game will now restart.");
+                    restartGame(); // Automatically restart after win
+                }, 500); // Small delay to ensure the player sees the last match
+            }
+        } else {
+            // Cards do not match; hide them after a delay
+            setTimeout(() => {
+                carts[v1].style.transform = "scaleY(0)";
+                carts[v2].style.transform = "scaleY(0)";
+                carts[v1].style.backgroundImage = "";
+                carts[v2].style.backgroundImage = "";
+            }, 1000);
+        }
+
+        // Clear the comparison array for the next turn
+        comp.length = 0;
+    }
+}
+
+    
+        function stopGame() {
+            clearInterval(timerInterval);
+            clearTimeout(restartInterval);
+            gameStarted = false;
+        }
+    </script>
+    
+</body>
+</html>

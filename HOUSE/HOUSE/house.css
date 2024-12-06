@@ -1,0 +1,318 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: end;   
+    background-image: url(img/8493670.jpg);
+    background-size: cover;
+    padding-top: 50px;
+}
+
+.tree{
+    width: 260px;
+    position: absolute;
+    bottom: -25px;
+    right: 240px;
+}
+
+.port1{
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width: 200px ;
+    height: 150px;
+    background-color: rgb(157, 157, 220) ;
+    border: 2PX darkblue solid;
+    border-right: none;
+    border-top: none;
+
+}
+.port3{
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width: 200px ;
+    height: 150px;
+    background-color: rgb(157, 157, 220) ;
+    border: 2PX darkblue solid;
+    border-left: none;
+    border-top: none;
+
+}
+.glass1{
+    width: 60px;
+    height: 100px;
+    border: 2PX darkblue solid;
+    border-bottom: none;
+    border-right: none;
+    background-color: rgb(245, 235, 220);
+}
+.glass2{
+    width: 40px;
+    height: 100px;
+    border: 2PX darkblue solid;
+    border-bottom: none;
+    background-color: rgb(245, 235, 220);
+}
+.etage1{
+    display: flex;
+    align-items: end;
+}
+.port2{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    width: 170px ;
+    height: 180px;
+    background-color: rgb(157, 157, 220) ;
+    border: 2PX darkblue solid;
+
+}
+.glass3::after{
+    content:"";
+    display: block;
+    width: 5px;
+    height: 25px;
+    background-color: darkblue;
+    position: relative;
+    border-radius: 3px;
+    top: 60px;
+    left: 16PX;
+}
+.glass3{
+    width: 110px;
+    height: 20px;
+    border: 2PX darkblue solid;
+    background-color: rgb(245, 235, 220);
+}
+.roof{
+    width: 90px;
+    height: 120px;
+    border: 2PX darkblue solid;
+    border-bottom: none;
+    background-color: rgb(245, 235, 220);
+}
+.ROW1{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 200px ;
+    height: 360px;
+    background-color: rgb(157, 157, 220) ;
+    border: 2PX darkblue solid;
+    border-bottom: none;
+    border-right: none;
+    transform: translateY(30px);
+
+
+}
+
+.ROW2{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 200px ;
+    height: 360px;
+    background-color: rgb(157, 157, 220) ;
+    border: 2PX darkblue solid;
+    border-bottom: none;
+    border-left: none;
+    transform: translateY(30px);
+
+
+}
+
+.collector{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.roof2{
+    width: 150px;
+    height: 15px;
+    border: 2PX darkblue solid;
+    background-color: rgb(245, 235, 220);
+    transform: skew(20DEG);
+}
+.window1{
+    width: 120px;
+    height: 90px;
+    border: 2PX darkblue solid;
+    background-color: rgb(245, 235, 220);
+    transform: translateY(-3px);
+    z-index: -1;
+}
+.window1::before{
+    display: block;
+    content: "";
+    width: 4px;
+    height: 87px;
+    background-color: darkblue ; 
+    position: relative;
+    left: 30px;
+}
+.etage2{
+    display: flex;
+}
+.rowcen{
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    width: 170px ;
+    height: 330px;
+    background-color: rgb(157, 157, 220) ;
+    border: 2PX darkblue solid;
+    transform: translateY(30px);
+
+}
+
+
+.window2{
+    border: 2PX darkblue solid;
+    background-color: rgb(245, 235, 220);
+    border-radius: 50%;
+}
+
+.etage3{
+
+    width: 600px ;
+    height: 25px;
+    background-color: rgb(157, 157, 220) ;
+    border: 2PX darkblue solid;
+    transform: translate( -16px , 30px);
+
+
+}
+.etage3::after{
+    content: "";
+    display: block;
+    width: 180px;
+    height: 60px;
+    background:  rgb(157, 157, 220) ; 
+    border: 2PX darkblue solid;
+    position: relative;
+    left: 206px;
+}
+
+#cart1{
+
+    width: 82px;
+    height: 86px;
+    background-size: cover;
+    border-bottom: 4px solid darkblue;
+    position: absolute ;
+    top: 22px;
+    left: 75px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s;
+}
+#cart2{
+
+    width: 82px;
+    height: 86px;
+    background-size: cover;
+    border-bottom: 4px solid darkblue;
+    position: absolute ;
+    top: 141px;
+    left: 75px;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 1s;
+}
+#cart3{
+
+    width: 82px;
+    height: 86px;
+    background-size: cover;
+    border-bottom: 4px solid darkblue;
+    position: absolute ;
+    top: 260px;
+    left: 75px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s;
+}
+#cart4{
+
+    width: 82px;
+    height: 86px;
+    background-size: cover;
+    border-bottom: 4px solid darkblue;
+    position: absolute ;
+    top: 22px;
+    left: 75px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s;
+}
+#cart5{
+
+    width: 82px;
+    height: 86px;
+    background-size: cover;
+    border-bottom: 4px solid darkblue;
+    position: absolute ;
+    top: 141px;
+    left: 75px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s;
+}
+#cart6{
+
+    width: 82px;
+    height: 86px;
+    background-size: cover;
+    border-bottom: 4px solid darkblue;
+    position: absolute ;
+    top: 260px;
+    left: 75px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 1s;
+}
+ 
+ .button, #timer {
+    width: 90px;
+    height: 90px;
+    text-align: center;
+    line-height: 90px; 
+    background-color: lightgray;
+    border-radius: 50%; 
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;
+}
+
+#start-button {
+    background-color: #4CAF50; /* Green */
+}
+
+#stop-button {
+    background-color: #f44336; /* Red */
+}
+
+#restart-button {
+    background-color: #008CBA; /* Blue */
+}
+
+.button:hover {
+    opacity: 0.8;
+}
